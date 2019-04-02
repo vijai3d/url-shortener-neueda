@@ -52,7 +52,7 @@ public class UrlIdService {
         LOGGER.info("URL Id generated: "+ id);
         try {
             redisTemplate.opsForValue().set(id, url);
-            LOGGER.debug("URL saved in db.");
+            LOGGER.info("URL saved in db.");
         } catch (RedisConnectionFailureException e) {
             LOGGER.error("There is no connection with database.", e);
             throw new RedisConnectionFailureException("Unable to connect to db", e);
