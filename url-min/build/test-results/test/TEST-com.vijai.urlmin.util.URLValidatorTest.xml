@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.vijai.urlmin.util.URLValidatorTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2019-04-04T19:00:59" hostname="DESKTOP-VC7NSTK" time="0.015">
+  <properties/>
+  <testcase name="testIsValidShort" classname="com.vijai.urlmin.util.URLValidatorTest" time="0.013"/>
+  <testcase name="testIfIsNotValid" classname="com.vijai.urlmin.util.URLValidatorTest" time="0.001"/>
+  <testcase name="testIsValid" classname="com.vijai.urlmin.util.URLValidatorTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

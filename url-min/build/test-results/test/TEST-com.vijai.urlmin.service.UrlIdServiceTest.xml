@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.vijai.urlmin.service.UrlIdServiceTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2019-04-04T19:00:54" hostname="DESKTOP-VC7NSTK" time="0.955">
+  <properties/>
+  <testcase name="testGetLongUrl" classname="com.vijai.urlmin.service.UrlIdServiceTest" time="0.944"/>
+  <testcase name="testGetShortUrl" classname="com.vijai.urlmin.service.UrlIdServiceTest" time="0.01"/>
+  <system-out><![CDATA[22:00:55.611 [Test worker] DEBUG com.vijai.urlmin.service.UrlIdService - Url retrieved for id: 1234FGds
+22:00:55.619 [Test worker] INFO com.vijai.urlmin.service.UrlIdService - URL Id generated: c0EYCAFmV
+22:00:55.620 [Test worker] INFO com.vijai.urlmin.service.UrlIdService - URL saved in db.
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

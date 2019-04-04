@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.vijai.urlmin.util.Base62Test" tests="2" skipped="0" failures="0" errors="0" timestamp="2019-04-04T19:00:59" hostname="DESKTOP-VC7NSTK" time="0.001">
+  <properties/>
+  <testcase name="testDecode" classname="com.vijai.urlmin.util.Base62Test" time="0.001"/>
+  <testcase name="testEncode" classname="com.vijai.urlmin.util.Base62Test" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
