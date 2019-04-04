@@ -6,7 +6,7 @@
 
 ## Start redis db
 1. cd db
-. docker-compose up
+2. docker-compose up
 
 ## Start backend
 1. cd url-min
