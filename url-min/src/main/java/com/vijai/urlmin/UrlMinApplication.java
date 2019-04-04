@@ -3,6 +3,8 @@ package com.vijai.urlmin;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.support.atomic.RedisAtomicInteger;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -13,6 +15,7 @@ public class UrlMinApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(UrlMinApplication.class, args);
 	}
+
 	@Bean
 	public WebMvcConfigurer corsConfigurer() {
 		return new WebMvcConfigurerAdapter() {
@@ -23,6 +26,11 @@ public class UrlMinApplication {
 
 			}
 		};
+	}
+
+	@Bean
+	public RedisAtomicInteger init(RedisConnectionFactory factory) {
+		return new RedisAtomicInteger("keyCounter", factory);
 	}
 
 }

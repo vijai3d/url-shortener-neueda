@@ -1,7 +1,7 @@
 package com.vijai.urlmin.rest.v1;
 
 import com.vijai.urlmin.service.UrlIdService;
-import org.apache.commons.validator.routines.UrlValidator;
+import com.vijai.urlmin.util.URLValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,23 +20,23 @@ public class UrlResource {
     @PostMapping("/get")
     public ResponseEntity getUrl(@RequestBody String id) {
 
-        String url = urlIdService.getLongUrl(id);
-        if (url == null) {
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+        if (!id.isEmpty() && URLValidator.INSTANCE.isValidShort(id)) {
+            id = id.replace("http://sho.rt/", "");
+            String url = urlIdService.getLongUrl(id);
+            if (url == null) {
+                return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+            }
+            Map<String, String> result = new HashMap<>();
+            result.put("url", url);
+            return ResponseEntity.status(HttpStatus.OK).body(result);
         }
-        Map<String, String> result = new HashMap<>();
-        result.put("url", url);
-        return ResponseEntity.status(HttpStatus.OK).body(result);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
     }
 
     @PostMapping("/create")
     public ResponseEntity create(@RequestBody String url) {
 
-        UrlValidator urlValidator = new UrlValidator(
-                new String[]{"http", "https"}
-        );
-
-        if (urlValidator.isValid(url)) {
+        if (URLValidator.INSTANCE.isValid(url)) {
             String id = urlIdService.getShortUrl(url);
             Map<String, String> result = new HashMap<>();
             result.put("id", id);
@@ -45,6 +45,4 @@ public class UrlResource {
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
     }
-
-
 }

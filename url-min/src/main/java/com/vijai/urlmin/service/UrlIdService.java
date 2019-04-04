@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.RedisConnectionFailureException;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.context.annotation.RequestScope;
 
 import java.util.concurrent.ThreadLocalRandom;
@@ -43,21 +42,27 @@ public class UrlIdService {
     }
 
     /**
-     * Generates shortened url for long and stores in db
+     * Generates shortened url for long and stores in db.
+     * Saving url as key is workaround to return same id for the same urls.
      * @param url - long url
      * @return - short url (id)
      */
-    public String getShortUrl(@RequestBody String url) {
-        String id = getUniqueId();
-        LOGGER.info("URL Id generated: "+ id);
-        try {
-            redisTemplate.opsForValue().set(id, url);
-            LOGGER.info("URL saved in db.");
-        } catch (RedisConnectionFailureException e) {
-            LOGGER.error("There is no connection with database.", e);
-            throw new RedisConnectionFailureException("Unable to connect to db", e);
+    public String getShortUrl(String url) throws RedisConnectionFailureException {
+        if (url.isEmpty()) {
+            return null;
         }
-        return id;
+        String id;
+        Boolean urlExist = redisTemplate.hasKey(url);
+        if (urlExist) {
+            id = redisTemplate.opsForValue().get(url);
+        } else {
+            id = getUniqueId();
+            LOGGER.info("URL Id generated: "+ id);
+            redisTemplate.opsForValue().set(id, url);
+            redisTemplate.opsForValue().set(url, id);
+            LOGGER.info("URL saved in db.");
+        }
+        return String.format("http://sho.rt/%s", id);
     }
 
     /**
