@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+
 @RequestMapping("/rest/v1/url")
 @RestController
 public class UrlResource {
@@ -17,18 +20,17 @@ public class UrlResource {
     @Autowired
     private UrlIdService urlIdService;
 
-    @PostMapping("/get")
+    @RequestMapping(value="/short", method=POST, produces="text/plain")
     public ResponseEntity getUrl(@RequestBody String id) {
 
         if (!id.isEmpty() && URLValidator.INSTANCE.isValidShort(id)) {
-            id = id.replace("http://sho.rt/", "");
+//            id = id.replace("http://sho.rt/", "");
             String url = urlIdService.getLongUrl(id);
             if (url == null) {
                 return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
             }
-            Map<String, String> result = new HashMap<>();
-            result.put("url", url);
-            return ResponseEntity.status(HttpStatus.OK).body(result);
+
+            return ResponseEntity.status(HttpStatus.OK).body(url);
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
     }

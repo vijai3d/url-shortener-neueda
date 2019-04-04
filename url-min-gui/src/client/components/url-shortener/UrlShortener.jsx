@@ -43,7 +43,8 @@ class UrlShortener extends Component {
                         <i className="material-icons right">send</i>
                     </button>
                 </form>
-                <p>Sort url is: <strong>{this.state.generatedId}</strong></p>
+                <p>Short url is: <strong>{this.state.generatedId}</strong></p>
+                <p>Paste this url in browser to get redirected to original</p>
                 <br/>
             </div>
         );

@@ -1,7 +1,36 @@
-version: '2'
+version: '3'
 services:
   db:
     image: "redis:alpine"
     hostname: redis
     ports:
      - "6379:6379"
+  gui:
+    image: node:alpine
+    volumes:
+    - ./url-min-gui/:/gui
+    working_dir: /gui
+    environment:
+      NODE_ENV: development
+    ports:
+    - 3000:3000
+    networks:
+    - net
+    command: npm start
+  backend:
+    image: java:8
+    volumes:
+    - ./url-min/:/back
+    working_dir: /back
+    ports:
+    - 8085:8085
+    links:
+    - "db:database"
+    networks:
+    - net
+    depends_on:
+      - db
+    command: java -jar ./build/libs/url-min-0.0.1-SNAPSHOT.jar
+networks:
+  net:
+    driver: "bridge"

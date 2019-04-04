@@ -62,7 +62,7 @@ public class UrlIdService {
             redisTemplate.opsForValue().set(url, id);
             LOGGER.info("URL saved in db.");
         }
-        return String.format("http://sho.rt/%s", id);
+        return String.format("http://localhost:3000/%s", id);
     }
 
     /**

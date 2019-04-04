@@ -36,7 +36,7 @@ public class URLValidatorTest {
 
     @Test
     public void testIsValidShort() throws Exception {
-        boolean result = uRLValidator.isValidShort("http://sho.rt/ZIwPqjq7");
+        boolean result = uRLValidator.isValidShort("http://localhost:3000/ZIwPqjq7");
         Assert.assertTrue(result);
     }
 }

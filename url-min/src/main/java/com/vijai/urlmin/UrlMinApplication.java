@@ -22,15 +22,10 @@ public class UrlMinApplication {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
 				registry.addMapping("/rest/v1/url/create").allowedOrigins("http://localhost:3000");
-				registry.addMapping("/rest/v1/url/get").allowedOrigins("http://localhost:3000");
+				registry.addMapping("/rest/v1/url/short").allowedOrigins("http://localhost:3000");
 
 			}
 		};
-	}
-
-	@Bean
-	public RedisAtomicInteger init(RedisConnectionFactory factory) {
-		return new RedisAtomicInteger("keyCounter", factory);
 	}
 
 }
